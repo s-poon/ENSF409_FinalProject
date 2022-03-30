@@ -4,21 +4,37 @@ public class Client {
     // Member Variables
     private String type;
     private int clientID;
-    private int grains;
-    private int protien;
-    private int fruitVeg;
-    private int other;
-    private int calories;
+    private double grains;
+    private double protien;
+    private double fruitVeg;
+    private double other;
+    private double calories;
 
     // Constructors
-
+    Client(
+        String type,
+        int clientID,
+        int grains,
+        int protien,
+        int fruitVeg,
+        int other,
+        int calories
+    ){
+        this.type = type;
+        this.clientID = clientID;
+        this.grains = grains * 0.01 * calories;
+        this.protien = protien * 0.01 * calories;
+        this.fruitVeg = fruitVeg * 0.01 * calories;
+        this.other = other * 0.01 * calories;
+        this.calories = calories;
+    }
     // Setters
     // Getters
-    public int getGrains(){ return this.grains; }
-    public int getProtien(){ return this.protien; }
-    public int getFruitVeg(){ return this.fruitVeg; }
-    public int getOther(){ return this.other; }
-    public int getCalories(){ return this.calories; }
+    public double getGrains(){ return this.grains; }
+    public double getProtien(){ return this.protien; }
+    public double getFruitVeg(){ return this.fruitVeg; }
+    public double getOther(){ return this.other; }
+    public double getCalories(){ return this.calories; }
     // Methods
 
 }

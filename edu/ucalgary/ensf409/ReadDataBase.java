@@ -1,12 +1,13 @@
 package edu.ucalgary.ensf409;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ReadDataBase{
     // Member Variables
-    public final String DBURL;
-    public final String USERNAME;
-    public final String PASSWORD;   
+    private final String DBURL;
+    private final String USERNAME;
+    private final String PASSWORD;   
 
     private Connection dbConnect;
     private ResultSet results;
@@ -31,6 +32,56 @@ public class ReadDataBase{
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Food> fillInventory(String tableName){
+        ArrayList<Food> temp = new ArrayList<Food>();
+        try{
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM " + tableName);
+            while(results.next()){
+                Food itemToAdd = new Food(
+                    results.getString("Name"),
+                    results.getInt("GrainContent"),
+                    results.getInt("FVContent"),
+                    results.getInt("ProContent"),
+                    results.getInt("Other"),
+                    results.getInt("Calories")
+                );
+                temp.add(itemToAdd);
+            }
+            myStmt.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return temp;
+    }
+
+    public Client[] getClientInfo(String tableName){
+        Client[] temp = new Client[4];
+        int i = 0;
+        try{
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM " + tableName);
+            while(results.next()){
+                Client clientToAdd = new Client(
+                    results.getString("Client"),
+                    results.getInt("ClientID"),
+                    results.getInt("WholeGrains"),
+                    results.getInt("FruitVeggies"),
+                    results.getInt("Protein"),
+                    results.getInt("Other"),
+                    results.getInt("Calories")
+                );
+                temp[i] = clientToAdd;
+                i ++;
+            }
+            myStmt.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return temp;
+    }
+
     public void close(){
         try{
             results.close();
