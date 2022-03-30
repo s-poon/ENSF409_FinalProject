@@ -3,11 +3,11 @@ package edu.ucalgary.ensf409;
 public class Food {
     // Member Variables
     private String description;
-    int wholeGrains;
-    int protien;
-    int fruitVeg;
-    int other;
-    int calories;
+    private int wholeGrains;
+    private int protien;
+    private int fruitVeg;
+    private int other;
+    private int calories;
 
     // Constructor
     Food(
