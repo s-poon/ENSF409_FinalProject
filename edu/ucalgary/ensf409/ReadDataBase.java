@@ -10,7 +10,7 @@ public class ReadDataBase{
     private final String PASSWORD;   
 
     private Connection dbConnect;
-    private ResultSet results;
+    private ResultSet results; 
     // Constructors
     ReadDataBase(String url, String user, String pw){
         this.DBURL = url;

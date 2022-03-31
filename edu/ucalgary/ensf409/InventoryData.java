@@ -14,7 +14,7 @@ public class InventoryData {
     // Constructors
     InventoryData(){
         ReadDataBase myJDBC = new ReadDataBase(
-            "jdbc:mysql://localhost:3306/inventory", 
+            "jdbc:mysql://localhost:3306/food_inventory", 
             "student", 
             "ensf"
         );
