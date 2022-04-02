@@ -29,6 +29,7 @@ public class Food {
     // Setters
 
     // Getters
+    public String getDescription(){ return this.description; }
     public double getGrains(){ return this.wholeGrains; }
     public double getProtien(){ return this.protien; }
     public double getFruitVeg(){ return this.fruitVeg; }

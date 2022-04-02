@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class InventoryData {
     // Member Variables
     private ArrayList<Food> stock;
-    private Client[] data;
+    private static Client[] data;
     private static Client adultMale;
     private static Client adultFemale;
     private static Client childOver8;
@@ -25,7 +25,7 @@ public class InventoryData {
 
     }
     // Setters
-    public void setClientStats(){
+    public static void setClientStats(){
         adultMale = data[0];
         adultFemale = data[1];
         childOver8 = data[2];
@@ -48,8 +48,7 @@ public class InventoryData {
     }
     // Methods
     public void moveItem(){}
-    public void sortInventory(){}
-    public void search(){}
+    public void sortInventory(String catagory){}
     
 
 }
