@@ -32,17 +32,22 @@ public class InventoryData {
         childUnder8 = data[3];
     }
     // Getters
+    public ArrayList<Food> getStock(){ return this.stock; }
     public static Client getClient(String type){
         Client myClient = null;
         switch(type){
             case "adultMale":
                 myClient = adultMale;
+                break;
             case "adultFemale":
                 myClient = adultFemale;
+                break;
             case "childOver8":
                 myClient = childOver8;
+                break;
             case "childUnder8":
                 myClient = childUnder8;
+                break;
         }
         return myClient;
     }
