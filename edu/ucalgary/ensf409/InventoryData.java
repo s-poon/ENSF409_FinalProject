@@ -1,6 +1,9 @@
 package edu.ucalgary.ensf409;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 public class InventoryData {
     // Member Variables
@@ -53,7 +56,8 @@ public class InventoryData {
     }
     // Methods
     public void moveItem(){}
-    public void sortInventory(String catagory){}
+    public void sortInventory(String catagory){
+    }
     
 
 }
