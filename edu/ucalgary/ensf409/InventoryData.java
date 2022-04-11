@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class InventoryData {
     // Member Variables
-    private ArrayList<Food> stock;
+    // Change to 4 or 5 diff array lists for each predominate catagory
+    private static ArrayList<Food> stock;
     private Client[] data;
     private static Client adultMale;
     private static Client adultFemale;

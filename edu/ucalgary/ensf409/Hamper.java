@@ -22,9 +22,9 @@ public class Hamper {
     // Getters
 
     // Methods
-    public void addFood(){
-        
-    }
+    // public void addFood(){
+    //     items.add(InventoryData.get)
+    // }
     
     public void calculateCalories(){
         for(int i = 0; i < clients.length; i ++){
