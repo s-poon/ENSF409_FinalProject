@@ -164,7 +164,7 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
     }
 
     public static void main(String[] args){
-        InventoryData dataBase = new InventoryData();
+        // InventoryData dataBase = new InventoryData();
         EventQueue.invokeLater(() -> {
             new GUIRequest().setVisible(true);
         });
