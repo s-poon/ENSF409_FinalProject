@@ -11,7 +11,6 @@ public class Request {
     private int numCO8;
     private Client[] clientList;
     private int numHampers;
-    Hamper[] hampers;
 
     // Constructors
     Request(int numAM, int numAF, int numCO8, int numCU8, int numHampers){
@@ -21,12 +20,13 @@ public class Request {
         this.numCO8 = numCO8;
         this.numHampers = numHampers;
         this.clientList = new Client[numAF + numAM + numCO8 + numCU8];
-        this.hampers = new Hamper[numHampers];
         createClientList();
     }
     // Setters
 
     // Getters
+    public int getNumHampers(){ return this.numHampers; }
+    
 
     // Methods
     public void createClientList(){
@@ -49,9 +49,4 @@ public class Request {
         }
     }
 
-    public void fillHampers(){
-        for(int i = 0; i < numHampers; i ++){
-            hampers[i] = new Hamper(clientList);
-        }
-    }
 }

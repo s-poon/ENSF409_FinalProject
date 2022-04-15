@@ -2,14 +2,14 @@ package edu.ucalgary.ensf409;
 
 import java.util.ArrayList;
 
-public class Hamper {
+public class Hamper extends InventoryData{
     // Member Variables
     private double wholeGrains;
     private double fruitVeg;
     private double protien;
     private double other;
-    private double calories;
-    private Client[] clients;
+    private int calories;
+    private final Client[] clients;
     private ArrayList<Food> items;
 
     // Constructors
@@ -20,13 +20,18 @@ public class Hamper {
     // Setters
 
     // Getters
+    public double getGrain(){ return this.wholeGrains; }
+    public double getFruitVeg(){ return this.fruitVeg; }
+    public double getProtien(){ return this.protien; }
+    public double getOther(){ return this.other; }
+    public int getCalories(){ return this.calories; }
 
     // Methods
-    public void addFood(){
-        
+    public void addFood(Food item){
+        items.add(item);
     }
     
-    public void calculateCalories(){
+    public void calculateCaloriesNeeded(){
         for(int i = 0; i < clients.length; i ++){
             wholeGrains += clients[i].getGrains();
             fruitVeg += clients[i].getFruitVeg();
@@ -34,5 +39,13 @@ public class Hamper {
             other += clients[i].getOther();
             calories += clients[i].getCalories();
         }
+    }
+
+    public int calculateDiff(){
+        int totalCal = 0;
+        for(Food item : items){
+            totalCal += item.getCalories();
+        }
+        return totalCal - this.calories;
     }
 }

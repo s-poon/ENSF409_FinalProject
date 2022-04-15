@@ -40,6 +40,7 @@ public class ReadDataBase{
             results = myStmt.executeQuery("SELECT * FROM " + tableName);
             while(results.next()){
                 Food itemToAdd = new Food(
+                    results.getInt("ItemID"),
                     results.getString("Name"),
                     results.getInt("GrainContent"),
                     results.getInt("FVContent"),
