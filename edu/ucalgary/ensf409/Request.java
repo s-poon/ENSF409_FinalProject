@@ -18,7 +18,7 @@ public class Request extends InventoryData{
         numAM = numAMIn;
         numCU8 = numCU8In;
         numCO8 = numCO8In;
-        this.numHampers = numAM.length;
+        this.numHampers = numHampers;
         this.hampers = new Hamper[numHampers];
         this.clientList = new Client[numHampers][40];
     }

@@ -74,7 +74,6 @@ public class InventoryData {
         if(checkInventory(hamper) != 0){ 
             return null; 
         }
-        System.out.println("hello there");
         takenValues = new HashSet<>();
         while(true){
             while(hamper.calcCalorieDiff() < 100){
