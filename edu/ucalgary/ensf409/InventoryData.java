@@ -67,7 +67,6 @@ public class InventoryData {
 
     public Hamper findPossibleHampers(Client[] list){
         Hamper[] hampers = new Hamper[3];
-        HashSet<Integer> values = new HashSet<>();
         Random rand = new Random();
         int size = stock.size(), i = 0, minDelta = 1000;;
         hamper = new Hamper(list);
@@ -98,7 +97,6 @@ public class InventoryData {
                 i ++;
             }else{
                 hamper.clearItems();
-                size = stock.size();
                 takenValues.clear();
             }
         }
