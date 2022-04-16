@@ -98,7 +98,6 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         numWeeks = Integer.parseInt(weeksInput.getText());
         
         if(validateInput()){
-            // String petID = idProcessing();
             Request creatRequest = new Request(
                 adultMales, 
                 adultFemales, 
@@ -147,21 +146,13 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
             co8Input.setText("");         
     }
 
-    public void mouseEntered(MouseEvent event){
-        
-    }
+    public void mouseEntered(MouseEvent event){}
 
-    public void mouseExited(MouseEvent event){
-        
-    }
+    public void mouseExited(MouseEvent event){}
 
-    public void mousePressed(MouseEvent event){
-        
-    }
+    public void mousePressed(MouseEvent event){}
 
-    public void mouseReleased(MouseEvent event){
-        
-    }
+    public void mouseReleased(MouseEvent event){}
 
     public static void main(String[] args){
         InventoryData dataBase = new InventoryData();

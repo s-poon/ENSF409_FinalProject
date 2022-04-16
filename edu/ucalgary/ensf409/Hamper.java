@@ -18,6 +18,7 @@ public class Hamper extends InventoryData{
     }
     
     // Setters
+    public void clearItems(){ this.items.clear(); }
 
     // Getters
     public double getGrain(){ return this.wholeGrains; }
@@ -41,7 +42,39 @@ public class Hamper extends InventoryData{
         }
     }
 
-    public int calculateDiff(){
+    public double calculateProtienDiff(){
+        double totalCal = 0;
+        for(Food item : items){
+            totalCal += item.getProtien();
+        }
+        return totalCal - this.protien;
+    }
+
+    public double calculateFruitDiff(){
+        double totalCal = 0;
+        for(Food item : items){
+            totalCal += item.getFruitVeg();
+        }
+        return totalCal - this.fruitVeg;
+    }
+
+    public double calculateGrainDiff(){
+        double totalCal = 0;
+        for(Food item : items){
+            totalCal += item.getGrains();
+        }
+        return totalCal - this.wholeGrains;
+    }
+
+    public double calculateOtherDiff(){
+        double totalCal = 0;
+        for(Food item : items){
+            totalCal += item.getOther();
+        }
+        return totalCal - this.other;
+    }
+
+    public int calculateCalorieDiff(){
         int totalCal = 0;
         for(Food item : items){
             totalCal += item.getCalories();

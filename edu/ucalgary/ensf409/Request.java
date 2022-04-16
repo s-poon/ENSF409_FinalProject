@@ -1,9 +1,8 @@
+
+
 package edu.ucalgary.ensf409;
 
-
-
-
-public class Request {
+public class Request extends InventoryData{
     // Member Variables
     private int numAM;
     private int numAF;
@@ -11,6 +10,7 @@ public class Request {
     private int numCO8;
     private Client[] clientList;
     private int numHampers;
+    private Hamper[] hampers;
 
     // Constructors
     Request(int numAM, int numAF, int numCO8, int numCU8, int numHampers){
@@ -21,6 +21,9 @@ public class Request {
         this.numHampers = numHampers;
         this.clientList = new Client[numAF + numAM + numCO8 + numCU8];
         createClientList();
+        for(int i = 0; i < numHampers; i ++){
+            hampers[i] = findPossibleHampers(clientList);
+        }
     }
     // Setters
 

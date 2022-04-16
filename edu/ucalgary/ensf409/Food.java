@@ -1,6 +1,6 @@
 package edu.ucalgary.ensf409;
 
-public class Food {
+public class Food implements Cloneable{
     // Member Variables
     private int itemID;
     private String description;
@@ -53,5 +53,9 @@ public class Food {
     public double getOther(){ return this.other; }
     public int getCalories(){ return this.calories; }
 
-    // Methods
+    // // Methods
+    @Override
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
 }
