@@ -4,69 +4,66 @@ package edu.ucalgary.ensf409;
 
 public class Request extends InventoryData{
     // Member Variables
-    private int numAM;
-    private int numAF;
-    private int numCU8;
-    private int numCO8;
-    private Client[] clientList;
+    private static int[] numAM;
+    private static int[] numAF;
+    private static int[] numCU8;
+    private static int[] numCO8;
+    private Client[][] clientList;
     private int numHampers;
     private Hamper[] hampers;
 
     // Constructors
-    Request(int numAM, int numAF, int numCO8, int numCU8, int numHampers){
-        this.numAF = numAF;
-        this.numAM = numAM;
-        this.numCU8 = numCU8;
-        this.numCO8 = numCO8;
-        this.numHampers = numHampers;
-        this.clientList = new Client[numAF + numAM + numCO8 + numCU8];
+    Request(int numAMIn[], int numAFIn[], int numCO8In[], int numCU8In[], int numHampers){
+        numAF = numAFIn;
+        numAM = numAMIn;
+        numCU8 = numCU8In;
+        numCO8 = numCO8In;
+        this.numHampers = numAM.length;
         this.hampers = new Hamper[numHampers];
-        createClientList();
-        for(int i = 0; i < numHampers; i ++){
-            hampers[i] = findPossibleHampers(clientList);
-            System.out.println("Cal " + hampers[i].getCalories());
-            System.out.println("Pro " + hampers[i].getProtien());
-            System.out.println("Fruit " + hampers[i].getFruitVeg());
-            System.out.println("Grain " + hampers[i].getGrain());
-            System.out.println("Other " + hampers[i].getOther());
-            System.out.println();
-            System.out.println("Cal Added " + hampers[i].getAddedCalories());
-            System.out.println("Pro Added " + hampers[i].getAddedProtien());
-            System.out.println("Fruit Added " + hampers[i].getAddedFruitVeg());
-            System.out.println("Grain Added " + hampers[i].getAddedGrain());
-            System.out.println("Other Added " + hampers[i].getAddedOther());
-            System.out.println();
-            System.out.println("Cal delta " + hampers[i].calcCalorieDiff());
-            System.out.println();
-        }
-        
-
-        
+        this.clientList = new Client[numHampers][40];
     }
     // Setters
 
     // Getters
     public int getNumHampers(){ return this.numHampers; }
-    public int getNumAM(){ return this.numAM; }
+    public static int getNumAM(int i){ return numAM[i]; }
+    public static int getNumAF(int i){ return numAF[i]; }
+    public static int getNumCU(int i){ return numCU8[i]; }
+    public static int getNumCO(int i){ return numCO8[i]; }
     
-
     // Methods
-    public void createClientList(){
+    public int fillHampers(){
+        for(int i = 0; i < this.numHampers; i ++){
+            this.clientList[i] = new Client[numAF[i] + numAM[i] + numCO8[i] + numCU8[i]];
+            createClientList(i);
+            hampers[i] = findPossibleHampers(clientList[i]);
+            if(hampers[i] == null){
+                return 1;
+            }
+            hampers[i].sortHamper();
+        }
+        OrderForm obe = new OrderForm();
+        obe.writeTofile(hampers);
+        myJDBC.removeItems(getUsedFood());
+        return 0;
+    }
+
+    public void createClientList(int k){
         int j = 0;
-        for(int i = 0; i < numAM; i ++){ 
-            clientList[j] = InventoryData.getClient("adultMale");
+        for(int i = 0; i < numAM[k]; i ++){ 
+            clientList[k][j] = InventoryData.getClient("adultMale");
             j ++;
         }
-        for(int i = 0; i < numAF; i ++){
-            clientList[j] = InventoryData.getClient("adultFemale");
+        for(int i = 0; i < numAF[k]; i ++){
+            clientList[k][j] = InventoryData.getClient("adultFemale");
             j ++;
         }
-        for(int i = 0; i < numCO8; i ++){
-            clientList[j] = InventoryData.getClient("childOver8");
+        for(int i = 0; i < numCO8[k]; i ++){
+            clientList[k][j] = InventoryData.getClient("childOver8");
             j ++;
         }
-        for(int i = 0; i < numCU8; i ++){
-            clientList[j] = InventoryData.getClient("childUnder8");
+        for(int i = 0; i < numCU8[k]; i ++){
+            clientList[k][j] = InventoryData.getClient("childUnder8");
             j ++;
         }
     }

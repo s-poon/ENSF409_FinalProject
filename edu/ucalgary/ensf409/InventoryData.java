@@ -9,15 +9,19 @@ import java.util.Random;
 public class InventoryData {
     // Member Variables
     private ArrayList<Food> stock;
+    private ArrayList<Food> usedFood = new ArrayList<>();
     private Client[] data;
     private static Client adultMale;
     private static Client adultFemale;
     private static Client childOver8;
     private static Client childUnder8;
+    private HashSet<Integer> takenValues;
+    private Hamper hamper;
+    ReadDataBase myJDBC;
 
     // Constructors
     InventoryData(){
-        ReadDataBase myJDBC = new ReadDataBase(
+        myJDBC = new ReadDataBase(
             "jdbc:mysql://localhost:3306/food_inventory", 
             "student", 
             "ensf"
@@ -26,7 +30,7 @@ public class InventoryData {
         stock = myJDBC.fillInventory("AVAILABLE_FOOD");
         data = myJDBC.getClientInfo("DAILY_CLIENT_NEEDS");
         setClientStats();
-        sortInventoryByType();
+        sortInventory();
  
     }
 
@@ -39,6 +43,8 @@ public class InventoryData {
     }
 
     // Getters
+    // public ReadDataBase dataBase(){ return this.myJDBC; }
+    public ArrayList<Food> getUsedFood(){ return this.usedFood; }
     public static Client getClient(String type){
         Client myClient = null;
         switch(type){
@@ -60,11 +66,16 @@ public class InventoryData {
     // Methods
 
     public Hamper findPossibleHampers(Client[] list){
-        Hamper hamper = new Hamper(list);
         Hamper[] hampers = new Hamper[3];
-        HashSet<Integer> takenValues = new HashSet<>();
-        int size = stock.size(), i = 0;
+        HashSet<Integer> values = new HashSet<>();
         Random rand = new Random();
+        int size = stock.size(), i = 0, minDelta = 1000;;
+        hamper = new Hamper(list);
+        if(checkInventory(hamper) != 0){ 
+            return null; 
+        }
+        System.out.println("hello there");
+        takenValues = new HashSet<>();
         while(true){
             while(hamper.calcCalorieDiff() < 100){
                 int n = rand.nextInt(size);
@@ -92,18 +103,82 @@ public class InventoryData {
                 takenValues.clear();
             }
         }
-        int minDelta = 1000;
         for(i = 0; i < 3; i ++){
             if(minDelta > hampers[i].calcCalorieDiff()){
                 minDelta = hampers[i].calcCalorieDiff();
                 hamper = hampers[i];
             }
         }
+        removeFromStock();
         return hamper;
     }
 
-    public void sortInventoryByType(){
+    public void removeFromStock(){
+        for(Food item : hamper.getItems()){
+            usedFood.add(item);
+            stock.remove(item);
+
+        }
+    }
+
+    public void sortInventory(){
         Collections.sort(stock, Comparator.comparing(Food::getCalories));
         Collections.reverse(stock);
+    }
+
+    public int checkInventory(Hamper hamper){
+
+        double fruit = calcFruit();
+        double other = calcOther();
+        double grain = calcGrain();
+        double protein = calcPro();
+
+        if(hamper.getProtien() > calcPro()){
+            System.out.println(hamper.getProtien());
+            System.out.println(protein);
+            return 1;
+        }
+        if(hamper.getFruitVeg() > calcFruit()){
+            return 2;
+        }
+        if(hamper.getOther() > calcOther()){
+            return 3;
+        }
+        if(hamper.getGrain() > calcGrain()){
+            return 4;
+        }
+        return 0;
+    }
+
+    public double calcPro(){
+        double totalCal = 0;
+        for(Food item : stock){
+            totalCal += item.getProtien();
+        }
+        return totalCal;
+    }
+
+    public double calcFruit(){
+        double totalCal = 0;
+        for(Food item : stock){
+            totalCal += item.getFruitVeg();
+        }
+        return totalCal;
+    }
+
+    public double calcGrain(){
+        double totalCal = 0;
+        for(Food item : stock){
+            totalCal += item.getGrains();
+        }
+        return totalCal;
+    }
+
+    public double calcOther(){
+        double totalCal = 0;
+        for(Food item : stock){
+            totalCal += item.getOther();
+        }
+        return totalCal;
     }
 }

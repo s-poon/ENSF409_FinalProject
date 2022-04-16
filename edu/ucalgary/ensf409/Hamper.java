@@ -1,12 +1,14 @@
 package edu.ucalgary.ensf409;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Hamper extends InventoryData{
     // Member Variables
     private double wholeGrains;
     private double fruitVeg;
-    private double protien;
+    private double protein;
     private double other;
     private int calories;
     private final Client[] clients;
@@ -25,7 +27,7 @@ public class Hamper extends InventoryData{
     // Getters
     public double getGrain(){ return this.wholeGrains; }
     public double getFruitVeg(){ return this.fruitVeg; }
-    public double getProtien(){ return this.protien; }
+    public double getProtien(){ return this.protein; }
     public double getOther(){ return this.other; }
     public int getCalories(){ return this.calories; }
     public ArrayList<Food> getItems(){ return this.items; }
@@ -75,7 +77,7 @@ public class Hamper extends InventoryData{
         for(int i = 0; i < clients.length; i ++){
             wholeGrains += clients[i].getGrains();
             fruitVeg += clients[i].getFruitVeg();
-            protien += clients[i].getProtien();
+            protein += clients[i].getProtien();
             other += clients[i].getOther();
             calories += clients[i].getCalories();
         }
@@ -86,7 +88,7 @@ public class Hamper extends InventoryData{
         for(Food item : items){
             totalCal += item.getProtien();
         }
-        return totalCal - this.protien;
+        return totalCal - this.protein;
     }
 
     public double calcFruitDiff(){
@@ -123,5 +125,9 @@ public class Hamper extends InventoryData{
             }
         }
         return totalCal - this.calories;
+    }
+
+    public void sortHamper(){
+        Collections.sort(items, Comparator.comparing(Food::getDescription));
     }
 }

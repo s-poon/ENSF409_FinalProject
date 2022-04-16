@@ -33,6 +33,23 @@ public class ReadDataBase{
         }
     }
 
+    public void removeItems(ArrayList<Food> items){
+        try{
+            for(Food item : items){
+                String query = "DELETE FROM available_food WHERE itemid = ?";
+                PreparedStatement prepStmt = dbConnect.prepareStatement(query);
+                int thing = item.getItemID();
+                prepStmt.setString(1, String.valueOf(thing));
+                prepStmt.executeUpdate();
+                prepStmt.close();
+            }
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Food> fillInventory(String tableName){
         ArrayList<Food> temp = new ArrayList<Food>();
         try{
@@ -51,7 +68,8 @@ public class ReadDataBase{
                 temp.add(itemToAdd);
             }
             myStmt.close();
-        }catch(SQLException e){
+        }
+        catch(SQLException e){
             e.printStackTrace();
         }
         return temp;
@@ -77,7 +95,8 @@ public class ReadDataBase{
                 i ++;
             }
             myStmt.close();
-        }catch(SQLException e){
+        }
+        catch(SQLException e){
             e.printStackTrace();
         }
         return temp;
@@ -87,7 +106,7 @@ public class ReadDataBase{
         try{
             results.close();
             dbConnect.close();
-            System.out.println("Files were sucessfully closed");
+            System.out.println("DataBase was sucessfully closed");
         }catch(SQLException e){
             e.printStackTrace();
         }
