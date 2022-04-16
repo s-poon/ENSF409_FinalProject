@@ -48,11 +48,11 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         co8Label = new JLabel("Childern Over 8:");
         weeksLabel = new JLabel("Number of Weeks");
 
-        amInput = new JTextField("0", 5);
-        afInput = new JTextField("0", 5);
-        cu8Input = new JTextField("0", 5);
-        co8Input = new JTextField("0", 5);  
-        weeksInput = new JTextField("0", 5);
+        amInput = new JTextField("1", 5);
+        afInput = new JTextField("1", 5);
+        cu8Input = new JTextField("2", 5);
+        co8Input = new JTextField("1", 5);  
+        weeksInput = new JTextField("1", 5);
 
         amInput.addMouseListener(this);
         afInput.addMouseListener(this);
@@ -98,7 +98,7 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         numWeeks = Integer.parseInt(weeksInput.getText());
         
         if(validateInput()){
-            Request creatRequest = new Request(
+            Request createRequest = new Request(
                 adultMales, 
                 adultFemales, 
                 childOver8, 

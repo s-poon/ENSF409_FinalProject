@@ -35,6 +35,7 @@ public class Client {
     public double getFruitVeg(){ return this.fruitVeg; }
     public double getOther(){ return this.other; }
     public double getCalories(){ return this.calories; }
+    public String getType(){ return this.type; }
     // Methods
 
 }

@@ -20,15 +20,34 @@ public class Request extends InventoryData{
         this.numCO8 = numCO8;
         this.numHampers = numHampers;
         this.clientList = new Client[numAF + numAM + numCO8 + numCU8];
+        this.hampers = new Hamper[numHampers];
         createClientList();
         for(int i = 0; i < numHampers; i ++){
             hampers[i] = findPossibleHampers(clientList);
+            System.out.println("Cal " + hampers[i].getCalories());
+            System.out.println("Pro " + hampers[i].getProtien());
+            System.out.println("Fruit " + hampers[i].getFruitVeg());
+            System.out.println("Grain " + hampers[i].getGrain());
+            System.out.println("Other " + hampers[i].getOther());
+            System.out.println();
+            System.out.println("Cal Added " + hampers[i].getAddedCalories());
+            System.out.println("Pro Added " + hampers[i].getAddedProtien());
+            System.out.println("Fruit Added " + hampers[i].getAddedFruitVeg());
+            System.out.println("Grain Added " + hampers[i].getAddedGrain());
+            System.out.println("Other Added " + hampers[i].getAddedOther());
+            System.out.println();
+            System.out.println("Cal delta " + hampers[i].calcCalorieDiff());
+            System.out.println();
         }
+        
+
+        
     }
     // Setters
 
     // Getters
     public int getNumHampers(){ return this.numHampers; }
+    public int getNumAM(){ return this.numAM; }
     
 
     // Methods

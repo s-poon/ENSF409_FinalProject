@@ -9,11 +9,6 @@ import java.util.Random;
 public class InventoryData {
     // Member Variables
     private ArrayList<Food> stock;
-    private ArrayList<Food> protien;
-    private ArrayList<Food> fruitVeg;
-    private ArrayList<Food> grain;
-    private ArrayList<Food> other;
-    private ArrayList<Food> mixed;
     private Client[] data;
     private static Client adultMale;
     private static Client adultFemale;
@@ -31,21 +26,10 @@ public class InventoryData {
         stock = myJDBC.fillInventory("AVAILABLE_FOOD");
         data = myJDBC.getClientInfo("DAILY_CLIENT_NEEDS");
         setClientStats();
-        protien = new ArrayList<>();
-        fruitVeg = new ArrayList<>();
-        grain = new ArrayList<>();
-        other = new ArrayList<>();
-        mixed = new ArrayList<>();
-        try{
-            sortInventoryByType();
-        }
-        catch(CloneNotSupportedException e){
-            System.out.println("Bruh");
-            System.exit(1);
-        }
-
-
+        sortInventoryByType();
+ 
     }
+
     // Setters
     public void setClientStats(){
         adultMale = data[0];
@@ -53,18 +37,23 @@ public class InventoryData {
         childOver8 = data[2];
         childUnder8 = data[3];
     }
+
     // Getters
     public static Client getClient(String type){
         Client myClient = null;
         switch(type){
             case "adultMale":
                 myClient = adultMale;
+                break;
             case "adultFemale":
                 myClient = adultFemale;
+                break;
             case "childOver8":
                 myClient = childOver8;
+                break;
             case "childUnder8":
                 myClient = childUnder8;
+                break;
         }
         return myClient;
     }
@@ -72,11 +61,12 @@ public class InventoryData {
 
     public Hamper findPossibleHampers(Client[] list){
         Hamper hamper = new Hamper(list);
+        Hamper[] hampers = new Hamper[3];
         HashSet<Integer> takenValues = new HashSet<>();
-        int size = stock.size();
+        int size = stock.size(), i = 0;
         Random rand = new Random();
         while(true){
-            while(hamper.calculateCalorieDiff() < 0){
+            while(hamper.calcCalorieDiff() < 100){
                 int n = rand.nextInt(size);
                 while(!takenValues.add(n)){
                     n = rand.nextInt(size);
@@ -85,40 +75,35 @@ public class InventoryData {
                 size --;
             }
             if(
-                (hamper.calculateFruitDiff() < 0) &&
-                (hamper.calculateGrainDiff() < 0) &&
-                (hamper.calculateProtienDiff() < 0) &&
-                (hamper.calculateOtherDiff() < 0)
+                (hamper.calcCalorieDiff() < 300) &&
+                (hamper.calcFruitDiff() > 0) &&
+                (hamper.calcGrainDiff() > 0) &&
+                (hamper.calcProDiff() > 0) &&
+                (hamper.calcOtherDiff() > 0)
             ){
-                break;
+                if(i == 3){
+                    break;
+                }
+                hampers[i] = hamper;
+                i ++;
             }else{
                 hamper.clearItems();
                 size = stock.size();
                 takenValues.clear();
             }
-
+        }
+        int minDelta = 1000;
+        for(i = 0; i < 3; i ++){
+            if(minDelta > hampers[i].calcCalorieDiff()){
+                minDelta = hampers[i].calcCalorieDiff();
+                hamper = hampers[i];
+            }
         }
         return hamper;
     }
 
-    public void sortInventoryByType()throws CloneNotSupportedException{
+    public void sortInventoryByType(){
         Collections.sort(stock, Comparator.comparing(Food::getCalories));
         Collections.reverse(stock);
-        for(Food item : stock){
-            if(item.getFruitVegPercent() > 60){
-                fruitVeg.add((Food)item.clone());
-            }else if(item.getGrainsPercent() > 60){
-                grain.add((Food)item.clone());
-            }else if(item.getProtienPercent() > 60){
-                protien.add((Food)item.clone());
-            }else if(item.getOtherPercent() > 60){
-                other.add((Food)item.clone());
-            }else{
-                mixed.add((Food)item.clone());
-            }
-        }
     }
-
-    
-
 }
