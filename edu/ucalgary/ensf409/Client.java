@@ -39,6 +39,5 @@ public class Client {
     public double getOther(){ return this.other; }
     public double getCalories(){ return this.calories; }
 
-    // Methods
 
 }
