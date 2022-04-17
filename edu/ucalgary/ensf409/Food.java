@@ -1,4 +1,37 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 package edu.ucalgary.ensf409;
+
+/**
+ * An instance of this class is used to represent an item from the class 
+ * 
+ * @author Group 24
+ * @version 1.4
+ * @since 1.0
+ */
 
 public class Food implements Cloneable{
     // Member Variables

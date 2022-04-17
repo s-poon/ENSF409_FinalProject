@@ -1,3 +1,28 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 package edu.ucalgary.ensf409;
 
 import java.util.ArrayList;
@@ -5,6 +30,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
+
+/**
+ * 
+ * 
+ * @author Group 24
+ * @version 3.4
+ * @since 1.0
+ */
 
 public class InventoryData {
     // Member Variables
@@ -42,9 +75,19 @@ public class InventoryData {
         childUnder8 = data[3];
     }
 
+    
+    /** 
+     * @param type
+     * @return ArrayList<Food>
+     */
     // Getters
     // public ReadDataBase dataBase(){ return this.myJDBC; }
     public ArrayList<Food> getUsedFood(){ return this.usedFood; }
+    
+    /** 
+     * @param type
+     * @return Client
+     */
     public static Client getClient(String type){
         Client myClient = null;
         switch(type){
@@ -63,6 +106,11 @@ public class InventoryData {
         }
         return myClient;
     }
+    
+    /** 
+     * @param list
+     * @return Hamper
+     */
     // Methods
 
     public Hamper findPossibleHampers(Client[] list){
@@ -81,7 +129,6 @@ public class InventoryData {
                     n = rand.nextInt(size);
                 }
                 hamper.addFood(stock.get(n));
-                size --;
             }
             if(
                 (hamper.calcCalorieDiff() < 300) &&
@@ -123,6 +170,11 @@ public class InventoryData {
         Collections.reverse(stock);
     }
 
+    
+    /** 
+     * @param hamper
+     * @return int
+     */
     public int checkInventory(Hamper hamper){
 
         double fruit = calcFruit();
@@ -147,6 +199,10 @@ public class InventoryData {
         return 0;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double calcPro(){
         double totalCal = 0;
         for(Food item : stock){
@@ -155,6 +211,10 @@ public class InventoryData {
         return totalCal;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double calcFruit(){
         double totalCal = 0;
         for(Food item : stock){
@@ -163,6 +223,10 @@ public class InventoryData {
         return totalCal;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double calcGrain(){
         double totalCal = 0;
         for(Food item : stock){
@@ -171,6 +235,10 @@ public class InventoryData {
         return totalCal;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double calcOther(){
         double totalCal = 0;
         for(Food item : stock){

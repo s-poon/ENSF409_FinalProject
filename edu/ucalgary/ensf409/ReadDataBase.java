@@ -1,7 +1,40 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 package edu.ucalgary.ensf409;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+/**
+ * 
+ * 
+ * @author Group 24
+ * @version 3.4
+ * @since 1.0
+ */
 
 public class ReadDataBase{
     // Member Variables
@@ -17,6 +50,8 @@ public class ReadDataBase{
         this.USERNAME = user;
         this.PASSWORD = pw;
     }
+    
+    
     // Setters
 
     // Getters
@@ -25,6 +60,10 @@ public class ReadDataBase{
     String getPassword(){ return this.PASSWORD; }
 
     // Methods
+    /** 
+     * @param none
+     * @return String
+     */
     public void initializeConnection(){
         try{
             dbConnect = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
@@ -33,6 +72,10 @@ public class ReadDataBase{
         }
     }
 
+    
+    /** 
+     * @param items
+     */
     public void removeItems(ArrayList<Food> items){
         try{
             for(Food item : items){
@@ -50,6 +93,11 @@ public class ReadDataBase{
         }
     }
 
+    
+    /** 
+     * @param tableName
+     * @return ArrayList<Food>
+     */
     public ArrayList<Food> fillInventory(String tableName){
         ArrayList<Food> temp = new ArrayList<Food>();
         try{
@@ -75,6 +123,11 @@ public class ReadDataBase{
         return temp;
     }
 
+    
+    /** 
+     * @param tableName
+     * @return Client[]
+     */
     public Client[] getClientInfo(String tableName){
         Client[] temp = new Client[4];
         int i = 0;

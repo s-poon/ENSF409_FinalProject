@@ -1,6 +1,37 @@
-
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
 package edu.ucalgary.ensf409;
+
+/**
+ * 
+ * 
+ * @author Group 24
+ * @version 3.4
+ * @since 1.0
+ */
 
 public class Request extends InventoryData{
     // Member Variables
@@ -23,10 +54,6 @@ public class Request extends InventoryData{
         this.clientList = new Client[numHampers][40];
     }
     
-    /** 
-     * @param fillHampers(
-     * @return int
-     */
     // Setters
 
     // Getters
@@ -38,6 +65,7 @@ public class Request extends InventoryData{
     
     
     /** 
+     * @param none
      * @return int
      */
     // Methods

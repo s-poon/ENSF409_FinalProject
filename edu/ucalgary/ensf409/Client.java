@@ -1,4 +1,37 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 package edu.ucalgary.ensf409;
+
+/**
+ * 
+ * 
+ * @author Group 24
+ * @version 3.4
+ * @since 1.0
+ */
 
 public class Client {
     // Member Variables

@@ -1,3 +1,28 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 package edu.ucalgary.ensf409;
 
 import java.awt.BorderLayout;
@@ -5,6 +30,14 @@ import java.awt.EventQueue;
 import java.awt.event.*;
 import java.awt.FlowLayout;
 import javax.swing.*;
+
+/**
+ * 
+ * 
+ * @author Group 24
+ * @version 3.4
+ * @since 1.0
+ */
 
 public class GUIRequest extends JFrame implements ActionListener, MouseListener{
     // Member Variables
