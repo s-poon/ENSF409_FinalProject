@@ -22,6 +22,11 @@ public class Request extends InventoryData{
         this.hampers = new Hamper[numHampers];
         this.clientList = new Client[numHampers][40];
     }
+    
+    /** 
+     * @param fillHampers(
+     * @return int
+     */
     // Setters
 
     // Getters
@@ -31,6 +36,10 @@ public class Request extends InventoryData{
     public static int getNumCU(int i){ return numCU8[i]; }
     public static int getNumCO(int i){ return numCO8[i]; }
     
+    
+    /** 
+     * @return int
+     */
     // Methods
     public int fillHampers(){
         for(int i = 0; i < this.numHampers; i ++){
@@ -48,6 +57,10 @@ public class Request extends InventoryData{
         return 0;
     }
 
+    
+    /** 
+     * @param k
+     */
     public void createClientList(int k){
         int j = 0;
         for(int i = 0; i < numAM[k]; i ++){ 

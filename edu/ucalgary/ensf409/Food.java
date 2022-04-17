@@ -52,10 +52,4 @@ public class Food implements Cloneable{
     public double getFruitVeg(){ return this.fruitVeg; }
     public double getOther(){ return this.other; }
     public int getCalories(){ return this.calories; }
-
-    // // Methods
-    @Override
-    public Object clone()throws CloneNotSupportedException{
-        return super.clone();
-    }
 }
