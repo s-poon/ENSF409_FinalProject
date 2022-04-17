@@ -26,10 +26,11 @@
 package edu.ucalgary.ensf409;
 
 /**
- * 
+ * An object from this class is used to hold the calorie requirments for each
+ * type of client that the food bank will serve
  * 
  * @author Group 24
- * @version 3.4
+ * @version 1.5
  * @since 1.0
  */
 
@@ -69,6 +70,6 @@ public class Client {
     public double getOther(){ return this.other; }
     public double getCalories(){ return this.calories; }
     public String getType(){ return this.type; }
-    // Methods
+    
 
 }

@@ -78,6 +78,10 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
     // Getters
 
     // Methods
+    /**
+     * 
+     * 
+     */
     public void setupGUI(){
         initializeVars();
 
@@ -121,6 +125,10 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         this.add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * 
+     * @param event
+     */
     public void actionPerformed(ActionEvent event){
         JButton actionSource = (JButton) event.getSource();
         int aM = Integer.parseInt(amInput.getText());
@@ -167,6 +175,14 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         
     }
 
+    /**
+     * 
+     * @param adultMale     the number of adult males
+     * @param adultFemale   the number of adult females
+     * @param childOver8    the number of childern over 8
+     * @param childUnder8   the number of childern under 8
+     * @return              returns true if all of the inputs are valid     
+     */
     public boolean validateInput(
         int adultMale, 
         int adultFemale,
@@ -202,7 +218,7 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
                 + " is an invalid number.  Please enter a number between 0-10"
             );
         }
-        if(numWeeks <= 0 || numWeeks + j > 10){
+        if(this.numWeeks <= 0 || this.numWeeks + j > 10){
             allInputValid = false;
             JOptionPane.showMessageDialog(this, 
                 "Too many hampers "+ 

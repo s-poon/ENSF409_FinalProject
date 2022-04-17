@@ -26,14 +26,15 @@
 package edu.ucalgary.ensf409;
 
 /**
- * An instance of this class is used to represent an item from the class 
+ * An instance of this class is used to represent the caloric properties of an
+ * item from the inventory
  * 
  * @author Group 24
  * @version 1.4
  * @since 1.0
  */
 
-public class Food implements Cloneable{
+public class Food{
     // Member Variables
     private int itemID;
     private String description;

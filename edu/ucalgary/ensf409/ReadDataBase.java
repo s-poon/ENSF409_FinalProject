@@ -95,8 +95,10 @@ public class ReadDataBase{
 
     
     /** 
-     * @param tableName
-     * @return ArrayList<Food>
+     * @param tableName     the name of the table that the inventory is filled
+     *                      from
+     * @return              an ArrayList of type food that contains the food
+     *                      object representation of the items in the table
      */
     public ArrayList<Food> fillInventory(String tableName){
         ArrayList<Food> temp = new ArrayList<Food>();
@@ -125,8 +127,10 @@ public class ReadDataBase{
 
     
     /** 
-     * @param tableName
-     * @return Client[]
+     * @param tableName     the name of the table that the client information is
+     *                      in
+     * @return              a client array that contatins the information for 
+     *                      each client type
      */
     public Client[] getClientInfo(String tableName){
         Client[] temp = new Client[4];
@@ -154,7 +158,7 @@ public class ReadDataBase{
         }
         return temp;
     }
-
+    
     public void close(){
         try{
             results.close();

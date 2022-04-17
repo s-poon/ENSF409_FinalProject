@@ -56,8 +56,8 @@ public class InventoryData {
     InventoryData(){
         myJDBC = new ReadDataBase(
             "jdbc:mysql://localhost:3306/food_inventory", 
-            "student", 
-            "ensf"
+            "root", 
+            "T!gertheG0AT"
         );
         myJDBC.initializeConnection();
         stock = myJDBC.fillInventory("AVAILABLE_FOOD");
@@ -77,11 +77,12 @@ public class InventoryData {
 
     
     /** 
+     * 
      * @param type
      * @return ArrayList<Food>
      */
     // Getters
-    // public ReadDataBase dataBase(){ return this.myJDBC; }
+    public ReadDataBase getDataBase(){ return this.myJDBC; }
     public ArrayList<Food> getUsedFood(){ return this.usedFood; }
     
     /** 
@@ -108,15 +109,18 @@ public class InventoryData {
     }
     
     /** 
-     * @param list
-     * @return Hamper
+     * @param list      An array of clients that represents the clients that 
+     *                  will be recieving the hamper
+     * @return          Returns
      */
     // Methods
 
     public Hamper findPossibleHampers(Client[] list){
         Hamper[] hampers = new Hamper[3];
         Random rand = new Random();
-        int size = stock.size(), i = 0, minDelta = 1000;;
+        int size = stock.size();
+        int i = 0;
+        int minDelta = 1000;;
         hamper = new Hamper(list);
         if(checkInventory(hamper) != 0){ 
             return null; 
@@ -177,14 +181,8 @@ public class InventoryData {
      */
     public int checkInventory(Hamper hamper){
 
-        double fruit = calcFruit();
-        double other = calcOther();
-        double grain = calcGrain();
-        double protein = calcPro();
-
         if(hamper.getProtien() > calcPro()){
             System.out.println(hamper.getProtien());
-            System.out.println(protein);
             return 1;
         }
         if(hamper.getFruitVeg() > calcFruit()){

@@ -1,9 +1,40 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 package edu.ucalgary.ensf409;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * An instance of this class represents a hamper that will be filled with food
+ * 
+ * @author Group 24
+ * @version 2.5
+ * @since 1.0
+ */
 public class Hamper extends InventoryData{
     // Member Variables
     private double wholeGrains;
@@ -22,19 +53,9 @@ public class Hamper extends InventoryData{
         items = new ArrayList<>();
     }
     
-    
-    /** 
-     * @param getAddedGrain(
-     */
-    // Setters
 
-    public void clearItems(){ this.items.clear(); }
 
-    
-    /** 
-     * @param getAddedGrain(
-     * @return double
-     */
+
     // Getters
 
     public double getGrain(){ return this.wholeGrains; }
@@ -46,9 +67,12 @@ public class Hamper extends InventoryData{
     public int getCalories(){ return this.calories; }
     public ArrayList<Food> getItems(){ return this.items; }
 
+/****************************** Getters ***************************************/
     
     /** 
-     * @return double
+     * Find how many grain calories have been added to the hamper
+     * 
+     * @return  the amount of grain calories that have beee added to the hamper
      */
     public double getAddedGrain(){
         double total = 0;
@@ -58,9 +82,11 @@ public class Hamper extends InventoryData{
         return total;
     }
 
-    
     /** 
-     * @return double
+     * Find how many fruit and vegtable calories have been added to the hamper
+     * 
+     * @return  the amount of fruit and vegtable calories that have beee added 
+     *          to the hamper
      */
     public double getAddedFruitVeg(){
         double total = 0;
@@ -72,9 +98,11 @@ public class Hamper extends InventoryData{
 
     
     /** 
-     * @return double
+     * Find how many protein calories have been added to the hamper
+     * 
+     * @return  the amount of protein calories that have beee added to the hamper
      */
-    public double getAddedProtien(){
+    public double getAddedProtein(){
         double total = 0;
         for(Food item : items){
             total += item.getProtien();
@@ -84,7 +112,9 @@ public class Hamper extends InventoryData{
 
     
     /** 
-     * @return double
+     * Find how many other calories have been added to the hamper
+     * 
+     * @return  the amount of other calories that have beee added to the hamper
      */
     public double getAddedOther(){
         double total = 0;
@@ -95,8 +125,10 @@ public class Hamper extends InventoryData{
     }
 
     
-    /** 
-     * @return int
+   /** 
+     * Find how many calories have been added to the hamper
+     * 
+     * @return  the amount of calories that have beee added to the hamper
      */
     public int getAddedCalories(){
         int total = 0;
@@ -109,8 +141,16 @@ public class Hamper extends InventoryData{
     
     
     // Methods
+
+    /**
+     * Clears all of the food that is currently in the hamper
+     */
+    public void clearItems(){ this.items.clear(); }
+
     /** 
-     * @param item
+     * Adds food to the hamper
+     * 
+     * @param item      The item to be added
      */
     public void addFood(Food item){
         items.add(item);
@@ -128,13 +168,10 @@ public class Hamper extends InventoryData{
 
     
     /** 
-     * @return double
+     * @return  the difference between the protein needed and the protein required
      */
     public double calcProDiff(){
-        double totalCal = 0;
-        for(Food item : items){
-            totalCal += item.getProtien();
-        }
+        double totalCal = getAddedProtein();
         return totalCal - this.protein;
     }
 
@@ -143,10 +180,7 @@ public class Hamper extends InventoryData{
      * @return double
      */
     public double calcFruitDiff(){
-        double totalCal = 0;
-        for(Food item : items){
-            totalCal += item.getFruitVeg();
-        }
+        double totalCal = getAddedFruitVeg();
         return totalCal - this.fruitVeg;
     }
 
@@ -155,10 +189,7 @@ public class Hamper extends InventoryData{
      * @return double
      */
     public double calcGrainDiff(){
-        double totalCal = 0;
-        for(Food item : items){
-            totalCal += item.getGrains();
-        }
+        double totalCal = getAddedGrain();
         return totalCal - this.wholeGrains;
     }
 
@@ -167,10 +198,7 @@ public class Hamper extends InventoryData{
      * @return double
      */
     public double calcOtherDiff(){
-        double totalCal = 0;
-        for(Food item : items){
-            totalCal += item.getOther();
-        }
+        double totalCal = getAddedOther();
         return totalCal - this.other;
     }
 
@@ -183,9 +211,7 @@ public class Hamper extends InventoryData{
         if(items.isEmpty()){
             return -100;
         }else{
-            for(Food item : items){
-                totalCal += item.getCalories();
-            }
+            totalCal = getAddedCalories();
         }
         return totalCal - this.calories;
     }
