@@ -18,14 +18,15 @@ import java.awt.FlowLayout;
 import javax.swing.*;
 
 /**
- * The GUI is created and maintained here
+ * The GUI is created and maintained here.  Main is also located here so this
+ * is the file that will be called on in the command line to run the program
  * 
  * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
  * @version 3.4
  * @since 1.0
  */
 
-public class GUI extends JFrame implements ActionListener, MouseListener{
+public class FoodBank extends JFrame implements ActionListener, MouseListener{
 /*************************** Member Variables *********************************/
     private int[] adultMales;
     private int[] adultFemales;
@@ -51,7 +52,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
     private JButton nextInfo;
 
 /***************************** Constructor ************************************/
-    public GUI(){
+    public FoodBank(){
         super("Create a Request");
         setupGUI();
         setSize(500, 300);
@@ -60,6 +61,13 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
     }
 
 /******************************* Methods **************************************/
+    public static void main(String[] args){
+        InventoryData dataBase = new InventoryData();
+        EventQueue.invokeLater(() -> {
+            new FoodBank().setVisible(true);
+        });
+    }
+
     /**
      * Configures the layout of the GUI and places all of the text, textboxes
      * and buttons
@@ -88,6 +96,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
+        // Adding the labels, textboxes and buttons to the frame
         headerPanel.add(instructions);
         clientPanel.add(amLabel);
         clientPanel.add(amInput);
@@ -109,8 +118,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
     }
 
     /**
-     * when either of the buttons are clicked actionPerformed will check which
-     * button was pressed
+     * When either of the buttons are clicked actionPerformed will check which
+     * button was pressed.  If next is pressed it adds hamper to the queue.
+     * If submit is pressed the hampers are created and filled.
      * 
      * @param event     
      */
@@ -141,10 +151,14 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
             int worked = request.fillHampers();
             if(worked != 0){
                 JOptionPane.showMessageDialog(this, 
-                "Inventory is too low to complete this order");
+                "Inventory is too low to complete this order"
+                );
             }
             j = 0;
-
+            clearFields();
+            JOptionPane.showMessageDialog(this, 
+            "Order was succesfully created"
+            );
         }else if(actionSource.equals(nextInfo)){
             if(validateInput(aM, aF, cO, cU)){
                 for(int i = 0; i < numWeeks; i ++){
@@ -154,13 +168,13 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
                     childOver8[j] = cO;
                     j ++;
                 }
+                clearFields();
             }
-            // resetTextbox();
         }
     }
 
     /**
-     * 
+     * Checks that the input from the GUI is valid.
      * 
      * @param adultMale     the number of adult males
      * @param adultFemale   the number of adult females
@@ -215,35 +229,24 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
         return allInputValid;
     }
 
+    /**
+     * Sets the textbox to blank when clicked on
+     */
     public void mouseClicked(MouseEvent event){
-        
         if(event.getSource().equals(amInput))
             amInput.setText("");
-
         if(event.getSource().equals(afInput))
             afInput.setText("");
-
         if(event.getSource().equals(cu8Input))
             cu8Input.setText("");
-
         if(event.getSource().equals(co8Input))
             co8Input.setText("");         
     }
 
     public void mouseEntered(MouseEvent event){}
-
     public void mouseExited(MouseEvent event){}
-
     public void mousePressed(MouseEvent event){}
-
     public void mouseReleased(MouseEvent event){}
-
-    public static void main(String[] args){
-        InventoryData dataBase = new InventoryData();
-        EventQueue.invokeLater(() -> {
-            new GUI().setVisible(true);
-        });
-    }
 
     /**
      * Initializes all of the member variables
@@ -267,5 +270,16 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
         cu8Input = new JTextField("0", 5);
         co8Input = new JTextField("0", 5);  
         weeksInput = new JTextField("0", 5);
+    }
+
+    /**
+     * Sets all of the fields to 0
+     */
+    public void clearFields(){
+        amInput.setText("0");
+        afInput.setText("0");
+        cu8Input.setText("0");
+        co8Input.setText("0");
+        weeksInput.setText("0");
     }
 }

@@ -66,7 +66,9 @@ public class InventoryData {
     }
 
 /****************************** Getters ***************************************/
-
+    /**
+     * @return  The instance of ReadDataBase being used to create
+     */
     public ReadDataBase getDataBase(){ return this.myJDBC; }
     public ArrayList<Food> getUsedFood(){ return this.usedFood; }
     
@@ -99,8 +101,6 @@ public class InventoryData {
      *                  will be recieving the hamper
      * @return          Returns
      */
-    
-
     public Hamper findPossibleHampers(Client[] list){
         Hamper[] hampers = new Hamper[3];
         Random rand = new Random();
