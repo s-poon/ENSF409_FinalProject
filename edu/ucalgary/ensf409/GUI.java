@@ -7,20 +7,6 @@
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  */
 
 package edu.ucalgary.ensf409;
@@ -32,15 +18,15 @@ import java.awt.FlowLayout;
 import javax.swing.*;
 
 /**
+ * The GUI is created and maintained here
  * 
- * 
- * @author Group 24
+ * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
  * @version 3.4
  * @since 1.0
  */
 
-public class GUIRequest extends JFrame implements ActionListener, MouseListener{
-    // Member Variables
+public class GUI extends JFrame implements ActionListener, MouseListener{
+/*************************** Member Variables *********************************/
     private int[] adultMales;
     private int[] adultFemales;
     private int[] childUnder8;
@@ -61,11 +47,11 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
     private JTextField co8Input;
     private JTextField weeksInput;
 
-    private JFrame frame;
     private JButton submitInfo;
     private JButton nextInfo;
-    // Constructor
-    public GUIRequest(){
+
+/***************************** Constructor ************************************/
+    public GUI(){
         super("Create a Request");
         setupGUI();
         setSize(500, 300);
@@ -73,18 +59,15 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         j = 0;
     }
 
-    // Setters
-
-    // Getters
-
-    // Methods
+/******************************* Methods **************************************/
     /**
+     * Configures the layout of the GUI and places all of the text, textboxes
+     * and buttons
      * 
-     * 
+     * @return none
      */
     public void setupGUI(){
         initializeVars();
-
         amInput.addMouseListener(this);
         afInput.addMouseListener(this);
         cu8Input.addMouseListener(this);
@@ -126,8 +109,10 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
     }
 
     /**
+     * when either of the buttons are clicked actionPerformed will check which
+     * button was pressed
      * 
-     * @param event
+     * @param event     
      */
     public void actionPerformed(ActionEvent event){
         JButton actionSource = (JButton) event.getSource();
@@ -170,12 +155,12 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
                     j ++;
                 }
             }
+            // resetTextbox();
         }
-        JOptionPane.showMessageDialog(this, "worked");
-        
     }
 
     /**
+     * 
      * 
      * @param adultMale     the number of adult males
      * @param adultFemale   the number of adult females
@@ -220,6 +205,7 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
         }
         if(this.numWeeks <= 0 || this.numWeeks + j > 10){
             allInputValid = false;
+            System.out.print(j);
             JOptionPane.showMessageDialog(this, 
                 "Too many hampers "+ 
                 "please submit order form before adding more orders"
@@ -255,28 +241,31 @@ public class GUIRequest extends JFrame implements ActionListener, MouseListener{
     public static void main(String[] args){
         InventoryData dataBase = new InventoryData();
         EventQueue.invokeLater(() -> {
-            new GUIRequest().setVisible(true);
+            new GUI().setVisible(true);
         });
     }
 
+    /**
+     * Initializes all of the member variables
+     */
     public void initializeVars(){
         adultMales = new int[10];
         adultFemales = new int[10];
         childUnder8 = new int[10];
         childOver8 = new int[10];
-        frame = new JFrame();
-        instructions = new JLabel("Please enter information to get a hamper");
+
+        instructions = new JLabel(
+            "Please enter information to get a hamper"
+        );
         amLabel = new JLabel("Adult Males:");
         afLabel = new JLabel("Adult Females:");
         cu8Label = new JLabel("Childern Under 8:");
         co8Label = new JLabel("Childern Over 8:");
         weeksLabel = new JLabel("Number of Weeks");
-
         amInput = new JTextField("0", 5);
         afInput = new JTextField("0", 5);
         cu8Input = new JTextField("0", 5);
         co8Input = new JTextField("0", 5);  
-        weeksInput = new JTextField("1", 5);
+        weeksInput = new JTextField("0", 5);
     }
-
 }

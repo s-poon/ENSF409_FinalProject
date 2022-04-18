@@ -1,0 +1,53 @@
+Group 24 Food Bank
+Order Form
+
+Name: 
+Date: 
+
+Original Request
+Hamper 1: 2 Adult Male, 2 Adult Female
+Hamper 2: 2 Adult Male, 2 Adult Female, 1 Child Over 8, 2 Child Under 8
+Hamper 3: 2 Adult Male, 2 Adult Female, 1 Child Over 8, 2 Child Under 8
+
+Hamper 1 Items:
+114		Apple juice, 1 kg
+577		Banana, bunch 6
+102		Black beans, 1 kg
+670		Bluegreen algae powder, 100 g
+83		Carrots
+286		Frozen waffles, pack of 10
+477		Pearl barley, 1 pound
+638		Roasted seaweed, 250 g
+303		Salmon, 5 filets
+581		Zucchini, 5
+
+Hamper 2 Items:
+417		Beets, 1 pound
+356		Chicken breast, pound
+258		Coconut milk, 1 liter
+287		Frozen blueberries, 2100 g
+588		Hummus
+147		Lettuce, 1 head
+483		Raisins, 40 g
+410		Sweet potato, bag
+294		Tinned sardines, pack of 5
+311		Whey powder, large jar
+30		Whole grain bread, loaf
+413		Zucchini, 10
+
+Hamper 3 Items:
+5		Apple, dozen
+197		Bananas, bunch
+251		Beets, 1 pound
+163		Bluegreen algae powder, 100 g
+178		Broccoli, 3 bunches
+575		Frozen pizza, pepperoni
+455		Frozen waffles, pack of 10
+33		Ground beef, pound
+367		Milk, 1%, 4 L
+153		Pumpkin, very large
+570		Quinoa, 1 kg
+655		Sauerkraut, 1 kg
+557		Strawberries, 2 kg
+480		Whey powder, large jar
+

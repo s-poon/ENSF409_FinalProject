@@ -7,83 +7,93 @@
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  */
 
 package edu.ucalgary.ensf409;
 
 /**
  * An instance of this class is used to represent the caloric properties of an
- * item from the inventory
+ * item from the inventory.  Converts each catagory from percentage to calorie
+ * amount
  * 
- * @author Group 24
+ * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
  * @version 1.4
  * @since 1.0
  */
 
 public class Food{
-    // Member Variables
+/*************************** Member Variables *********************************/
     private int itemID;
     private String description;
     private double wholeGrains;
-    private double protien;
+    private double protein;
     private double fruitVeg;
     private double other;
     private int calories;
-    private int wholeGrainsPercent;
-    private int protienPercent;
-    private int fruitVegPercent;
-    private int otherPercent;
 
-    // Constructor
+/***************************** Constructor ************************************/
+    /**
+     * Creates a food object that hold the caloric information of the item
+     * 
+     * @param itemID        The ID number of the item
+     * @param description   The description of the item
+     * @param wholeGrains   The percentage of grain 
+     * @param fruitVeg      The percentage of fruit and vegtables 
+     * @param protein       The percentage of protein
+     * @param other         The percentage of other
+     * @param calories      The calories in the item  
+     */
     Food(
         int itemID,
         String description,
         int wholeGrains, 
         int fruitVeg, 
-        int protien, 
+        int protein, 
         int other, 
         int calories
     ){
         this.itemID = itemID;
-        this.wholeGrainsPercent = wholeGrains;
-        this.fruitVegPercent = fruitVeg;
-        this.protienPercent = protien;
-        this.otherPercent = other;
         this.description = description;
         this.wholeGrains = wholeGrains * 0.01 * calories;
         this.fruitVeg = fruitVeg * 0.01 * calories;
-        this.protien = protien * 0.01 * calories;
+        this.protein = protein * 0.01 * calories;
         this.other = other * 0.01 * calories;
         this.calories = calories;
     }
 
-    // Setters
-
-    // Getters
-    public int getGrainsPercent(){ return this.wholeGrainsPercent; }
-    public int getProtienPercent(){ return this.protienPercent; }
-    public int getFruitVegPercent(){ return this.fruitVegPercent; }
-    public int getOtherPercent(){ return this.otherPercent; }
-
+/******************************* Getters **************************************/
+    /**
+     * @return The item ID of the food
+     */    
     public int getItemID(){ return this.itemID; }
+
+    /**
+     * @return The description of the food
+     */
     public String getDescription(){ return this.description; }
+
+    /**
+     * @return The grain component of the food
+     */
     public double getGrains(){ return this.wholeGrains; }
-    public double getProtien(){ return this.protien; }
+
+    /**
+     * @return The protein component of the food
+     */
+    public double getProtein(){ return this.protein; }
+
+    /**
+     * @return The fruit and vegtable component of the food
+     */
     public double getFruitVeg(){ return this.fruitVeg; }
+
+    /**
+     * @return The other component of the food
+     */
     public double getOther(){ return this.other; }
+
+    /**
+     * @return The calories in the food
+     */
     public int getCalories(){ return this.calories; }
 }

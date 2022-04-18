@@ -7,20 +7,6 @@
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  */
 
 package edu.ucalgary.ensf409;
@@ -32,13 +18,13 @@ import java.time.LocalDateTime;
 /**
  * 
  * 
- * @author Group 24
+ * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
  * @version 3.4
  * @since 1.0
  */
 
 public class OrderForm{
-
+/****************************** Getters ***************************************/
     public void writeTofile(Hamper[] hampers){
         LocalDateTime now = LocalDateTime.now();
 

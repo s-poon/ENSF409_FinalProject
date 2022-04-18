@@ -7,20 +7,6 @@
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  */
 
 package edu.ucalgary.ensf409;
@@ -32,15 +18,16 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
+ * InventoryData is the class that handles creating the hampers and managing the
+ * stock.
  * 
- * 
- * @author Group 24
+ * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
  * @version 3.4
  * @since 1.0
  */
 
 public class InventoryData {
-    // Member Variables
+/*************************** Member Variables *********************************/
     private ArrayList<Food> stock;
     private ArrayList<Food> usedFood = new ArrayList<>();
     private Client[] data;
@@ -50,14 +37,14 @@ public class InventoryData {
     private static Client childUnder8;
     private HashSet<Integer> takenValues;
     private Hamper hamper;
-    ReadDataBase myJDBC;
+    private ReadDataBase myJDBC;
 
-    // Constructors
+/***************************** Constructor ************************************/
     InventoryData(){
         myJDBC = new ReadDataBase(
             "jdbc:mysql://localhost:3306/food_inventory", 
-            "root", 
-            "T!gertheG0AT"
+            "student", 
+            "ensf"
         );
         myJDBC.initializeConnection();
         stock = myJDBC.fillInventory("AVAILABLE_FOOD");
@@ -67,7 +54,10 @@ public class InventoryData {
  
     }
 
-    // Setters
+/****************************** Setters ***************************************/
+    /**
+     * Sets the client statistics for each type of client and stores it
+     */
     public void setClientStats(){
         adultMale = data[0];
         adultFemale = data[1];
@@ -75,13 +65,8 @@ public class InventoryData {
         childUnder8 = data[3];
     }
 
-    
-    /** 
-     * 
-     * @param type
-     * @return ArrayList<Food>
-     */
-    // Getters
+/****************************** Getters ***************************************/
+
     public ReadDataBase getDataBase(){ return this.myJDBC; }
     public ArrayList<Food> getUsedFood(){ return this.usedFood; }
     
@@ -108,12 +93,13 @@ public class InventoryData {
         return myClient;
     }
     
+/****************************** Methods ***************************************/
     /** 
      * @param list      An array of clients that represents the clients that 
      *                  will be recieving the hamper
      * @return          Returns
      */
-    // Methods
+    
 
     public Hamper findPossibleHampers(Client[] list){
         Hamper[] hampers = new Hamper[3];
@@ -181,17 +167,17 @@ public class InventoryData {
      */
     public int checkInventory(Hamper hamper){
 
-        if(hamper.getProtien() > calcPro()){
+        if(hamper.getProtien() > proteinInStock()){
             System.out.println(hamper.getProtien());
             return 1;
         }
-        if(hamper.getFruitVeg() > calcFruit()){
+        if(hamper.getFruitVeg() > fruitInStock()){
             return 2;
         }
-        if(hamper.getOther() > calcOther()){
+        if(hamper.getOther() > otherInStock()){
             return 3;
         }
-        if(hamper.getGrain() > calcGrain()){
+        if(hamper.getGrain() > grainInStock()){
             return 4;
         }
         return 0;
@@ -201,10 +187,10 @@ public class InventoryData {
     /** 
      * @return double
      */
-    public double calcPro(){
+    public double proteinInStock(){
         double totalCal = 0;
         for(Food item : stock){
-            totalCal += item.getProtien();
+            totalCal += item.getProtein();
         }
         return totalCal;
     }
@@ -213,7 +199,7 @@ public class InventoryData {
     /** 
      * @return double
      */
-    public double calcFruit(){
+    public double fruitInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getFruitVeg();
@@ -225,7 +211,7 @@ public class InventoryData {
     /** 
      * @return double
      */
-    public double calcGrain(){
+    public double grainInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getGrains();
@@ -237,7 +223,7 @@ public class InventoryData {
     /** 
      * @return double
      */
-    public double calcOther(){
+    public double otherInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getOther();
