@@ -52,6 +52,9 @@ public class FoodBank extends JFrame implements ActionListener, MouseListener{
     private JButton nextInfo;
 
 /***************************** Constructor ************************************/
+    /**
+     * Initializes the GUI
+     */
     public FoodBank(){
         super("Create a Request");
         setupGUI();
@@ -66,6 +69,11 @@ public class FoodBank extends JFrame implements ActionListener, MouseListener{
         EventQueue.invokeLater(() -> {
             new FoodBank().setVisible(true);
         });
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                dataBase.getDataBase().close();
+            }
+        }, "Shutdown-thread"));
     }
 
     /**

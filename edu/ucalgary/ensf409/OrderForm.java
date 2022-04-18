@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
- * 
+ * OrderForm handles creating the text file
  * 
  * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
  * @version 3.4
@@ -24,10 +24,16 @@ import java.time.LocalDateTime;
  */
 
 public class OrderForm{
-/****************************** Getters ***************************************/
-    public void writeTofile(Hamper[] hampers){
-        LocalDateTime now = LocalDateTime.now();
+/****************************** Methods ***************************************/
+    /**
+     * Creates the order form.
+     * 
+     * @param hampers   The hampers that are part of the order.
+     */
 
+    public void writeTofile(Hamper[] hampers){
+        // Get the time and date to be the name of the file to avoid duplication
+        LocalDateTime now = LocalDateTime.now();
         try{
             String format = new String(
                 String.valueOf(now.getYear())

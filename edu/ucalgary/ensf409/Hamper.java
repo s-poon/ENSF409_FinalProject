@@ -16,10 +16,10 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * An instance of this class represents a hamper that will be filled with food
+ * An instance of this class represents a hamper that will be filled with food.
  * 
  * @author Tammy Pham, Steven Poon, Bill Thai and Alex Yeap
- * @version 2.5
+ * @version 2.6
  * @since 1.0
  */
 public class Hamper extends InventoryData{
@@ -54,7 +54,7 @@ public class Hamper extends InventoryData{
     public double getGrain(){ return this.wholeGrains; }
 
     /**
-     * @return      Returns the amount of fruits and vegtables the hamper needs 
+     * @return      Returns the amount of fruits and vegetables the hamper needs 
      *              based on the clients recieving the hamper          
      */
     public double getFruitVeg(){ return this.fruitVeg; }
@@ -95,7 +95,7 @@ public class Hamper extends InventoryData{
     }
 
     /** 
-     * @return  The amount of fruit and vegtable calories that have been added 
+     * @return  The amount of fruit and vegetable calories that have been added 
      *          to the hamper
      */
     public double getAddedFruitVeg(){
@@ -152,9 +152,7 @@ public class Hamper extends InventoryData{
      * @param item      The item to be added
      * @see Food
      */
-    public void addFood(Food item){
-        items.add(item);
-    }
+    public void addFood(Food item){ items.add(item); }
     
     /**
      * Calculates the amount of calories the hamper must have based on the 
@@ -180,8 +178,8 @@ public class Hamper extends InventoryData{
 
     
     /** 
-     * @return  The difference between the fruit and vegtable added, and fruit 
-     *          and vegtable required
+     * @return  The difference between the fruit and vegetables added, and fruit 
+     *          and vegetables required
      */
     public double calcFruitDiff(){
         double added = getAddedFruitVeg();

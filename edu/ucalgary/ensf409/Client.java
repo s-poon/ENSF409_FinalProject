@@ -39,7 +39,7 @@ public class Client {
      * @param clientID  The client ID number
      * @param grains    The percentage of grain needed in their diet
      * @param protien   The percentage of protien needed in their diet
-     * @param fruitVeg  The percentage of fruits and vegtables needed in their 
+     * @param fruitVeg  The percentage of fruits and vegetables needed in their 
      *                  diet
      * @param other     The percentage of other needed in their diet
      * @param calories  The calories needed in their diet
@@ -79,7 +79,7 @@ public class Client {
     public double getProtein(){ return this.protien; }
 
     /**
-     * @return  The fruit and vegtable calories the client needs in a week
+     * @return  The fruit and vegetable calories the client needs in a week
      */
     public double getFruitVeg(){ return this.fruitVeg; }
 

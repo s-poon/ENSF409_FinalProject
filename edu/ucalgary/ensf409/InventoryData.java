@@ -40,6 +40,10 @@ public class InventoryData {
     private ReadDataBase myJDBC;
 
 /***************************** Constructor ************************************/
+    /**
+     * Reads the database and fills the inventory and gets the client 
+     * information
+     */
     InventoryData(){
         myJDBC = new ReadDataBase(
             "jdbc:mysql://localhost:3306/food_inventory", 
@@ -67,14 +71,21 @@ public class InventoryData {
 
 /****************************** Getters ***************************************/
     /**
-     * @return  The instance of ReadDataBase being used to create
+     * @return  The instance of ReadDataBase being used to fill the inventory
+     * @see ReadDataBase
      */
     public ReadDataBase getDataBase(){ return this.myJDBC; }
+
+    /**
+     * @return The food that has been added the hampers
+     * @see Food
+     * @see ArrayList
+     */
     public ArrayList<Food> getUsedFood(){ return this.usedFood; }
     
     /** 
-     * @param type
-     * @return Client
+     * @param type      The type of client ie adult female, adult male, ...
+     * @return          A client that has the information of the input
      */
     public static Client getClient(String type){
         Client myClient = null;
@@ -94,100 +105,11 @@ public class InventoryData {
         }
         return myClient;
     }
-    
-/****************************** Methods ***************************************/
+
     /** 
-     * @param list      An array of clients that represents the clients that 
-     *                  will be recieving the hamper
-     * @return          Returns
+     * @return  The amount of protein in stock
      */
-    public Hamper findPossibleHampers(Client[] list){
-        Hamper[] hampers = new Hamper[3];
-        Random rand = new Random();
-        int size = stock.size();
-        int i = 0;
-        int minDelta = 1000;;
-        hamper = new Hamper(list);
-        if(checkInventory(hamper) != 0){ 
-            return null; 
-        }
-        takenValues = new HashSet<>();
-        while(true){
-            while(hamper.calcCalorieDiff() < 100){
-                int n = rand.nextInt(size);
-                while(!takenValues.add(n)){
-                    n = rand.nextInt(size);
-                }
-                hamper.addFood(stock.get(n));
-            }
-            if(
-                (hamper.calcCalorieDiff() < 300) &&
-                (hamper.calcFruitDiff() > 0) &&
-                (hamper.calcGrainDiff() > 0) &&
-                (hamper.calcProDiff() > 0) &&
-                (hamper.calcOtherDiff() > 0)
-            ){
-                if(i == 3){
-                    break;
-                }
-                hampers[i] = hamper;
-                i ++;
-            }else{
-                hamper.clearItems();
-                takenValues.clear();
-            }
-        }
-        for(i = 0; i < 3; i ++){
-            if(minDelta > hampers[i].calcCalorieDiff()){
-                minDelta = hampers[i].calcCalorieDiff();
-                hamper = hampers[i];
-            }
-        }
-        removeFromStock();
-        return hamper;
-    }
-
-    public void removeFromStock(){
-        for(Food item : hamper.getItems()){
-            usedFood.add(item);
-            stock.remove(item);
-
-        }
-    }
-
-    public void sortInventory(){
-        Collections.sort(stock, Comparator.comparing(Food::getCalories));
-        Collections.reverse(stock);
-    }
-
-    
-    /** 
-     * @param hamper
-     * @return int
-     */
-    public int checkInventory(Hamper hamper){
-
-        if(hamper.getProtien() > proteinInStock()){
-            System.out.println(hamper.getProtien());
-            return 1;
-        }
-        if(hamper.getFruitVeg() > fruitInStock()){
-            return 2;
-        }
-        if(hamper.getOther() > otherInStock()){
-            return 3;
-        }
-        if(hamper.getGrain() > grainInStock()){
-            return 4;
-        }
-        return 0;
-    }
-
-    
-    /** 
-     * @return double
-     */
-    public double proteinInStock(){
+    public double getProteinInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getProtein();
@@ -195,11 +117,10 @@ public class InventoryData {
         return totalCal;
     }
 
-    
     /** 
-     * @return double
+     * @return  The amount of fruits and vegetables in stock
      */
-    public double fruitInStock(){
+    public double getFruitInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getFruitVeg();
@@ -207,11 +128,10 @@ public class InventoryData {
         return totalCal;
     }
 
-    
     /** 
-     * @return double
+     * @return  The amount of grain in stock
      */
-    public double grainInStock(){
+    public double getGrainInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getGrains();
@@ -221,13 +141,136 @@ public class InventoryData {
 
     
     /** 
-     * @return double
+     * @return  The amount of other in stock
      */
-    public double otherInStock(){
+    public double getOtherInStock(){
         double totalCal = 0;
         for(Food item : stock){
             totalCal += item.getOther();
         }
         return totalCal;
+    }
+    
+/****************************** Methods ***************************************/
+    /** 
+     * Uses an algorithm to find the best hamper and then removes the items from
+     * stock. 
+     * <p>
+     * The algorithm works by selecting random food from the inventory.  Once it
+     * has satisfied the total calorie requirments, it checks that all of the
+     * other fields have been filled as well.  If they have not the hamper is 
+     * discarded and a new one is tried until all of the fields have been 
+     * filled.  It is then added to an array and the program finds 2 more.  Once
+     * three potential hampers have been found it choses the one with the least
+     * waste and returns it.
+     * 
+     * @param list      An array of clients that represents the clients that 
+     *                  will be recieving the hamper
+     * @return          A hamper with the least waste that fills the requirments
+     *                  of the clients recieving it
+     * @see Hamper
+     * @see Client
+     */
+    public Hamper findPossibleHampers(Client[] list){
+        Hamper[] hampers = new Hamper[3];
+        Random rand = new Random();
+        int size = stock.size();
+        int i = 0;
+        int minDelta = 1000;;
+        this.hamper = new Hamper(list);
+        /*  Uses a hashtable to keep track of the indices of the food removed 
+         *  from stock
+         */
+        takenValues = new HashSet<>();
+        // Check if the inventory can handle the hamper
+        if(checkInventory(this.hamper) != 0){ 
+            return null; 
+        }
+        while(true){
+            while(this.hamper.calcCalorieDiff() < 100){
+                // Find a random index to add
+                int n = rand.nextInt(size);
+                // Ensure that the item is not already taken
+                while(!takenValues.add(n)){
+                    n = rand.nextInt(size);
+                }
+                // Add the item to the hamper
+                this.hamper.addFood(stock.get(n));
+            }
+            // Check if all requirments are satisfied 
+            if(
+                (this.hamper.calcCalorieDiff() < 300) &&
+                (this.hamper.calcFruitDiff() > 0) &&
+                (this.hamper.calcGrainDiff() > 0) &&
+                (this.hamper.calcProDiff() > 0) &&
+                (this.hamper.calcOtherDiff() > 0)
+            ){
+                // Add hamper to array
+                hampers[i] = this.hamper;
+                i ++;
+                // If there are already 3 hampers in array, break
+                if(i == 3){
+                    break;
+                }
+            }else{
+                // Empty hamper and taken values
+                this.hamper.clearItems();
+                takenValues.clear();
+            }
+        }
+        // Check to find hamper with the least waste
+        for(i = 0; i < 3; i ++){
+            if(minDelta > hampers[i].calcCalorieDiff()){
+                minDelta = hampers[i].calcCalorieDiff();
+                this.hamper = hampers[i];
+            }
+        }
+        // Remove the items added
+        removeFromStock();
+        return this.hamper;
+    }
+
+    /**
+     * Removes the items that have been added to the hamper from stock and add 
+     * them to usedFood
+     */
+    public void removeFromStock(){
+        for(Food item : this.hamper.getItems()){
+            this.usedFood.add(item);
+            this.stock.remove(item);
+        }
+    }
+
+    /**
+     * Sorts the stock by total calories in decending order
+     */
+    public void sortInventory(){
+        Collections.sort(stock, Comparator.comparing(Food::getCalories));
+        Collections.reverse(stock);
+    }
+
+    
+    /** 
+     * Checks to see if there is enough stock to fill the hamper
+     * 
+     * @param hamper    The hamper that is about to be created
+     * @return          Returns 0 if there is enough inventory to fill the 
+     *                  hamper
+     */
+    public int checkInventory(Hamper hamper){
+        if(hamper.getProtien() > getProteinInStock()){
+            System.out.println(hamper.getProtien());
+            return 1;
+        }
+        if(hamper.getFruitVeg() > getFruitInStock()){
+            return 2;
+        }
+        if(hamper.getOther() > getOtherInStock()){
+            return 3;
+        }
+        if(hamper.getGrain() > getGrainInStock()){
+            return 4;
+        }
+        return 0;
     }
 }

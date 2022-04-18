@@ -32,16 +32,18 @@ public class ReadDataBase{
     private ResultSet results; 
 
 /***************************** Constructor ************************************/
+    /**
+     * Accepts the database to be accessed, the username, and password
+     * 
+     * @param url       The database to be accessed
+     * @param user      The username
+     * @param pw        The password
+     */
     ReadDataBase(String url, String user, String pw){
         this.DBURL = url;
         this.USERNAME = user;
         this.PASSWORD = pw;
     }
-
-/****************************** Getters ***************************************/
-    String getDburl(){ return this.DBURL; }
-    String getUsername(){ return this.USERNAME; }
-    String getPassword(){ return this.PASSWORD; }
 
 /****************************** Methods ***************************************/
     /** 
@@ -61,7 +63,8 @@ public class ReadDataBase{
     /** 
      * Removes items that have been added to hampers from the database
      * 
-     * @param items
+     * @param items     The items that are to be removed from the database
+     * @see Food
      * @see ArrayList
      */
     public void removeItems(ArrayList<Food> items){
@@ -83,9 +86,13 @@ public class ReadDataBase{
 
     
     /** 
-     * @param tableName     the name of the table where the available food is
+     * Takes the food from the table, makes each one a food object, and then
+     * adds it to an arraylist.  Once all of the items have been read and added, 
+     * the arraylist is returned.
+     * 
+     * @param tableName     The name of the table where the available food is
      *                      kept
-     * @return              an ArrayList of type food that contains the food
+     * @return              An ArrayList of type food that contains the food
      *                      object representation of the items in the table
      * @see ArrayList
      * @see Food
@@ -115,11 +122,14 @@ public class ReadDataBase{
         return temp;
     }
 
-    
     /** 
-     * @param tableName     the name of the table where the client information 
+     * Takes the client from the table, makes each one a client object, and then
+     * adds it to an array.  Once all of the items have been read and added the 
+     * array is returned.
+     * 
+     * @param tableName     The name of the table where the client information 
      *                      is located
-     * @return              a client array that contatins the information for 
+     * @return              A client array that contatins the information for 
      *                      each client type
      * @see Client
      */
@@ -150,6 +160,9 @@ public class ReadDataBase{
         return temp;
     }
     
+    /**
+     * Closes the database
+     */
     public void close(){
         try{
             results.close();

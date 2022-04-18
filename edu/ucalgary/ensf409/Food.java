@@ -33,7 +33,7 @@ public class Food{
 
 /***************************** Constructor ************************************/
     /**
-     * Creates a food object that hold the caloric information of the item
+     * Creates a food object that holds the caloric information of the item
      * 
      * @param itemID        The ID number of the item
      * @param description   The description of the item
