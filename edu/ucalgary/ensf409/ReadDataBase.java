@@ -84,7 +84,6 @@ public class ReadDataBase{
         }
     }
 
-    
     /** 
      * Takes the food from the table, makes each one a food object, and then
      * adds it to an arraylist.  Once all of the items have been read and added, 

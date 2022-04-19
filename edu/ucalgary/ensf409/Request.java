@@ -88,10 +88,12 @@ public class Request extends InventoryData{
 /****************************** Methods ***************************************/
     /**
      * Takes the information about the order and creates the client list for 
-     * each hamper.  It then calls upon the 
+     * each hamper.  It then calls upon
      *        
      * @return      returns 0 if filling the hamper and creating the file was 
      *              sucessful, returns 1 otherwise
+     * @see Client
+     * @see InventoryData
      */
     public int fillHampers(){
         for(int i = 0; i < this.numHampers; i ++){

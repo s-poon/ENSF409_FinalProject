@@ -148,6 +148,8 @@ public class FoodBank extends JFrame implements ActionListener, MouseListener{
                     childOver8[j] = cO;
                     j ++;
                 }
+            }else{
+                return;
             }
             Request request = new Request(
                 adultMales, 
@@ -200,40 +202,48 @@ public class FoodBank extends JFrame implements ActionListener, MouseListener{
         if(adultMale < 0 || adultMale > 10){
             allInputValid = false;
             JOptionPane.showMessageDialog(
-                this, adultMale 
-                + " is an invalid number.  Please enter a number between 0-10"
+                this, 
+                "Invalid number.  Please enter a number between 0-10"
             );
         }
         if(adultFemale < 0 || adultFemale > 10){
             allInputValid = false;
             JOptionPane.showMessageDialog(
-                this, adultFemales
-                + " is an invalid number.  Please enter a number between 0-10"
+                this,
+                "Invalid number.  Please enter a number between 0-10"
             );
         }
         if(childOver8 < 0 || childOver8 > 10){
             allInputValid = false;
             JOptionPane.showMessageDialog(
-                this, childOver8
-                + " is an invalid number.  Please enter a number between 0-10"
+                this,
+                "Invalid number.  Please enter a number between 0-10"
             );
         }
         if(childUnder8 < 0 || childUnder8 > 10){
             allInputValid = false;
             JOptionPane.showMessageDialog(
-                this, childUnder8
-                + " is an invalid number.  Please enter a number between 0-10"
+                this,
+                "Invalid number.  Please enter a number between 0-10"
             );
         }
-        if(this.numWeeks <= 0 || this.numWeeks + j > 10){
+        if(this.numWeeks + j > 10){
             allInputValid = false;
-            System.out.print(j);
             JOptionPane.showMessageDialog(this, 
                 "Too many hampers "+ 
                 "please submit order form before adding more orders"
             );
             j = 0;
         }
+        if(this.numWeeks <= 0){
+            allInputValid = false;
+            JOptionPane.showMessageDialog(this, 
+                "Please choose at least one week "
+            );
+            j = 0;
+        }
+
+        
         return allInputValid;
     }
 

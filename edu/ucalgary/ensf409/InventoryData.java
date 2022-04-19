@@ -86,6 +86,7 @@ public class InventoryData {
     /** 
      * @param type      The type of client ie adult female, adult male, ...
      * @return          A client that has the information of the input
+     * @see Client
      */
     public static Client getClient(String type){
         Client myClient = null;
@@ -176,7 +177,7 @@ public class InventoryData {
         Random rand = new Random();
         int size = stock.size();
         int i = 0;
-        int minDelta = 1000;;
+        int minDelta = 1000;
         this.hamper = new Hamper(list);
         /*  Uses a hashtable to keep track of the indices of the food removed 
          *  from stock
@@ -208,6 +209,7 @@ public class InventoryData {
                 // Add hamper to array
                 hampers[i] = this.hamper;
                 i ++;
+                takenValues.clear();
                 // If there are already 3 hampers in array, break
                 if(i == 3){
                     break;
@@ -259,7 +261,6 @@ public class InventoryData {
      */
     public int checkInventory(Hamper hamper){
         if(hamper.getProtien() > getProteinInStock()){
-            System.out.println(hamper.getProtien());
             return 1;
         }
         if(hamper.getFruitVeg() > getFruitInStock()){
